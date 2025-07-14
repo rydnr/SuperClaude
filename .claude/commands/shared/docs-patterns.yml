@@ -44,17 +44,17 @@ Directory_Standards:
 
 ```yaml
 File_Naming:
-  Reports: "<command>-<type>-<timestamp>.md"
-  Metrics: "<metric>-<date>.md|html|json"
+  Reports: "<command>-<type>-<timestamp>.org"
+  Metrics: "<metric>-<date>.org|html|json"
   Audit: "audit-<YYYY-MM-DD>.log"
-  Tasks: "{type}-{id}-{slug}.md"
+  Tasks: "{type}-{id}-{slug}.org"
 
 Examples:
-  Analysis_Report: "analysis-security-20240115-143022.md"
+  Analysis_Report: "analysis-security-20240115-143022.org"
   Coverage_Report: "coverage-20240115.html"
   Audit_Log: "audit-2024-01-15.log"
-  RCA_Report: "rca-api-timeout-20240115-143022.md"
-  Task_File: "feature-001-auth-system.md"
+  RCA_Report: "rca-api-timeout-20240115-143022.org"
+  Task_File: "feature-001-auth-system.org"
 
 Task_ID_Format: "YYYYMMDD-HHMMSS"
 Task_Types: ["feature", "bugfix", "refactor", "docs", "test"]
@@ -146,13 +146,13 @@ Quality_Standards:
 
 ```yaml
 Command_To_Directory_Mapping:
-  analyze: ".claudedocs/reports/analysis-*.md"
-  scan: ".claudedocs/reports/scan-*.md"
+  analyze: ".claudedocs/reports/analysis-*.org"
+  scan: ".claudedocs/reports/scan-*.org"
   test: ".claudedocs/metrics/coverage-*.html"
-  improve: ".claudedocs/metrics/quality-*.md"
-  troubleshoot: ".claudedocs/incidents/rca-*.md"
-  estimate: ".claudedocs/summaries/estimate-*.md"
-  document: "docs/[category]/*.md"
+  improve: ".claudedocs/metrics/quality-*.org"
+  troubleshoot: ".claudedocs/incidents/rca-*.org"
+  estimate: ".claudedocs/summaries/estimate-*.org"
+  document: "docs/[category]/*.org"
   git: ".claudedocs/audit/git-operations-*.log"
   deploy: ".claudedocs/audit/deployment-*.log"
 
@@ -175,7 +175,9 @@ Directory_Creation_Logic:
 Project_Documentation:
   Organization_Rules:
     - "README.md at each level"
-    - "index.md for navigation"
+    - "index.org for navigation"
+    - "journal.org for journaling"
+    - "story-[topic].org for storytelling"
     - "Versioned subdirectories when needed"
     - "Assets in dedicated folders"
 

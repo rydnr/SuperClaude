@@ -202,7 +202,7 @@ Event_Patterns:
     System_Events: "Technical/infrastructure events"
     
   Event_Design:
-    Structure: ["Event ID", "Timestamp", "Event type", "Payload", "Metadata"]
+    Structure: ["Event ID", "Timestamp", "Event type", "Payload", "Metadata", "Version", "Previous Event ID"]
     Naming: ["Past tense", "Business language", "Specific actions"]
     Versioning: ["Schema evolution", "Backward compatibility", "Event migration"]
     
@@ -220,6 +220,11 @@ Event_Patterns:
     Purpose: "Manage distributed transactions"
     Types: ["Orchestration", "Choreography"]
     Implementation: ["Compensation actions", "State machines", "Event coordination"]
+
+  Flow:
+    Pattern: "Defined sequence of events that are not designed upfront, but emerge as consistent system behavior"
+    Implementation: ["Ordered sequence of event identifiers", "Can be nested"]
+    Benefits: ["Can be associated to conceptual use cases but are not explicitly designed"]
 ```
 
 ## Layered Architecture Patterns
@@ -231,17 +236,21 @@ Clean_Architecture:
     Application: "Use cases & orchestration"
     Infrastructure: "External concerns & frameworks"
     Presentation: "UI/API & user interfaces"
-    
+
   Dependency_Rules:
     Direction: "Dependencies point inward toward domain"
     Abstraction: "Inner layers define interfaces"
     Implementation: "Outer layers provide implementations"
     
 Hexagonal_Architecture:
-  Core: "Application core w/ business logic"
-  Ports: "Interfaces for external communication"
-  Adapters: "Implementations of port interfaces"
-  Benefits: ["Testability", "Technology independence", "Maintainability"]
+    Domain: "Core business logic & entities"
+    Application: "Adapter discovery in infrastructure layer, dependency injection, routing incoming events from primary adapters to the domain, emitting outgoing events from the domain to secondary adapters. DI frameworks."
+    Infrastructure: "Adapters (implementations of port interfaces). Eventually they form a catalog of implementations for different domains. Wrapping domain events according to the requirements of the technologies used to send or receive them"
+    Benefits: ["Testability", "Technology independence", "Maintainability"]
+  Dependency_Rules:
+    Direction: "Infrastructure depends on Domain. Application depends on Infrastructure and Domain"
+    Abstraction: "Domain define the Ports"
+    Implementation: "Infrastructure implement Ports as Adapters"
   
 Onion_Architecture:
   Center: "Domain model"
@@ -489,15 +498,11 @@ DDD_Patterns:
       Implementation: "Separate models | Event synchronization | Eventual consistency"
       
   Implementation_Patterns:
-    Layered_Architecture:
-      Domain_Layer: "Core business logic | No dependencies on other layers"
-      Application_Layer: "Use cases | Orchestrates domain objects"
-      Infrastructure_Layer: "External concerns | Database, web, messaging"
-      
     Hexagonal_Architecture:
-      Core_Principle: "Domain at center | Adapters for external concerns"
-      Ports: "Interfaces defined by domain | Input/output boundaries"
-      Adapters: "Implementations of ports | Framework-specific code"
+      Domain: "Core business logic & entities"
+      Application: "Adapter discovery in infrastructure layer, dependency injection, routing incoming events from primary adapters to the domain, emitting outgoing events from the domain to secondary adapters. DI frameworks."
+      Infrastructure: "Adapters (implementations of port interfaces). Eventually they form a catalog of implementations for different domains. Wrapping domain events according to the requirements of the technologies used to send or receive them"
+
 ```
 
 ---

@@ -210,7 +210,7 @@ UltraCompressed_Mode_Integration:
 
 ```yaml
 Code_Deliverables:
-  Commits: "type: description | feat|fix|refactor|perf|test|docs | Why>What"
+  Commits: "type: description | 🧪 :test-tube: (A new failing test) After test is added | 🤔 :thinking-face: (Naive implementation) When test passes trivially| ✅ :white-check-mark: (Working implementation) When test passes with real logic |🚀 (Refactor) Improving code after green|perf|test|docs | Why>What"
   Documentation: "API(endpoints|params|examples) | Code(JSDoc|README) | User(guides|FAQs)"
   Tests: "Unit(functions|logic) | Integration(APIs|services) | E2E(flows|paths)"
 

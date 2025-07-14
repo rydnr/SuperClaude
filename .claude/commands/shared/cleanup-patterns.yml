@@ -47,6 +47,7 @@ Files:
   - .gitignore, .gitattributes
   - package.json, package-lock.json
   - Source code in src/, lib/
+  - .org files anywhere
 
 Code:
   - Error handling blocks
