@@ -1,37 +1,63 @@
-# Logs
-logs/
-*.log
+# Environment configuration
+.env
+.env.local
+.superclaude
 
-# Claude operations documentation
-.claudedocs/
-.claude_logs/
-
-# Task management (project-specific)
-./claudedocs/tasks/
-
-# System files
+# OS files
 .DS_Store
 Thumbs.db
-desktop.ini
-.Spotlight-V100
-.Trashes
 
-# IDE files
+# Editor directories and files
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
-.project
-.settings/
+
+# Logs
+*.log
 
 # Temporary files
 *.tmp
 *.temp
-*.bak
-*.backup
-*.old
-.cache/
 
-# Backup files from install script
-superclaude-backup.*
+# Build outputs
+dist/
+build/
+out/
+
+# Dependencies
+node_modules/
+vendor/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+env/
+
+# Testing
+coverage/
+.coverage
+*.coverage
+.pytest_cache/
+
+# Documentation builds
+docs/_build/
+site/
+
+# Credentials and secrets
+*.pem
+*.key
+.credentials.json
+secrets/
+
+# Session files
+.session
+*.session
+
+# Cache
+.cache/
+*.cache

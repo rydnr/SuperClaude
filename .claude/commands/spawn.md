@@ -1,4 +1,4 @@
-**Purpose**: Parallel specialized agents
+**Purpose**: Multi-agent orchestration with persona-based collaboration
 
 ---
 
@@ -9,132 +9,184 @@ Execute: immediate. --plan→show plan first
 Legend: Generated based on symbols used in command
 Purpose: "[Action][Subject] in $ARGUMENTS"
 
-Spawn specialized sub-agents for focused tasks with parallel execution capabilities.
+Spawn multiple agents concurrently with different personas, tasks, or both. Enable true parallel execution and multi-perspective analysis.
 
 @include shared/flag-inheritance.yml#Universal_Always
 
 Examples:
-- `/spawn --agent researcher "OAuth 2.0 best practices"` - Research then implement
-- `/spawn --mode parallel --agent builder "User auth, Profile API"` - Parallel development
-- `/spawn --mode sequential "Research → Build → Review payment"` - Full cycle workflow
-- `/spawn --mode collaborative --ultrathink "Design microservices"` - Collaborative design
+- `/spawn --task "implement auth" --persona-backend` - Single agent (traditional)
+- `/spawn --batch tasks.yml --coordinate` - Multiple agents, different tasks
+- `/spawn --swarm --task "review code" --personas architect,security,qa` - Multi-persona analysis
+- `/spawn --matrix feature-matrix.yml --monitor` - Full persona × task matrix
 
-## Agent Types
+## Spawn Modes
 
-Researcher Agent:
-- Deep dive into topics
-- Compare solutions
-- Analyze trade-offs
-- Find best practices
-- Document findings
+**Single Agent** (Traditional):
+- One task, one persona
+- Synchronous execution
+- Use when waiting for results
 
-Builder Agent:
-- Generate code
-- Implement features
-- Create tests
-- Build prototypes
-- Integrate systems
+**Batch Mode** (--batch):
+- Multiple agents, different tasks
+- Parallel execution
+- Config file driven
+- Example: auth-tasks.yml
 
-Reviewer Agent:
-- Code quality checks
-- Security analysis
-- Performance review
-- Best practice validation
-- Suggest improvements
+**Swarm Mode** (--swarm):
+- Multiple personas, same task
+- Get diverse perspectives
+- Automatic conflict resolution
+- Example: 3 personas review same code
 
-Optimizer Agent:
-- Performance profiling
-- Resource optimization
-- Algorithm improvements
-- Database tuning
-- Cache strategies
+**Matrix Mode** (--matrix):
+- Multiple personas × multiple tasks
+- Comprehensive coverage
+- Full perspective analysis
+- Example: 3 personas × 4 tasks = 12 agents
 
-Documenter Agent:
-- API documentation
-- User guides
-- Code comments
-- Architecture docs
-- README files
+## Configuration Examples
 
-## Execution Modes
-
-Sequential Mode:
+**Batch Configuration** (tasks.yml):
 ```yaml
-Flow: Agent1 → Agent2 → Agent3
-Use: When tasks depend on each other
-Example: Research → Build → Review
+agents:
+  - id: auth-api
+    task: "Implement authentication endpoints"
+    persona: backend
+    thinking: think-hard
+    mcps: [c7, seq]
+    
+  - id: auth-ui
+    task: "Create login components"
+    persona: frontend
+    thinking: think
+    mcps: [magic, c7]
+    
+  - id: auth-test
+    task: "Write auth tests"
+    persona: qa
+    thinking: think
+    mcps: [pup]
 ```
 
-Parallel Mode:
-```yaml
-Flow: Agent1 | Agent2 | Agent3
-Use: For independent tasks
-Example: Multiple feature builds
+**Swarm Example**:
+```bash
+/spawn --swarm --task "Review database schema" \
+       --personas architect,backend,performance,security
+       
+# Each persona analyzes the same schema:
+# - Architect: scalability, patterns
+# - Backend: queries, indexes
+# - Performance: optimization opportunities
+# - Security: access control, encryption
 ```
 
-Collaborative Mode:
+**Matrix Configuration** (matrix.yml):
 ```yaml
-Flow: Agents work together
-Use: Complex problems
-Example: System design session
+tasks:
+  - "Design API endpoints"
+  - "Implement business logic"
+  - "Create UI components"
+  - "Write tests"
+  
+personas: [architect, backend, frontend, qa]
+# Creates 16 agents (4×4 matrix)
 ```
+
+## Coordination & Output
+
+**Inter-Agent Communication** (--coordinate):
+- Shared context between agents
+- Message passing for dependencies
+- Conflict resolution mechanisms
+- Progress synchronization
+
+**Output Aggregation** (--aggregate):
+```markdown
+# Task: Database Schema Review
+
+## Architect Perspective
+- Scalability concerns with user table
+- Suggests sharding strategy
+
+## Security Perspective  
+- Missing encryption for PII
+- Recommends field-level encryption
+
+## Performance Perspective
+- Index recommendations
+- Query optimization tips
+
+## Consensus Recommendations
+1. Implement sharding for users
+2. Add field encryption
+3. Create composite indexes
+```
+
+**Progress Monitoring** (--monitor):
+```
+🚀 Multi-Agent Status
+
+Running: 4/6 agents
+├── backend-api: 75% ███████▌  
+├── frontend-ui: 45% ████▌     
+├── security-audit: 90% █████████ 
+└── qa-tests: 20% ██        
+
+Completed: 2/6 agents
+✅ architect-design
+✅ analyzer-research
+```
+
+## Real-World Examples
+
+```bash
+# Feature Development Team
+/spawn --batch feature-team.yml --coordinate --aggregate
+# Spawns: architect, backend, frontend, qa agents
+
+# Security Audit (Multi-Persona)
+/spawn --swarm --task "Audit authentication system" \
+       --personas security,architect,backend,analyzer \
+       --aggregate --think-hard
+
+# Comprehensive Refactoring
+/spawn --matrix refactor-plan.yml --dependent --monitor
+# Analyzes each module with each persona
+
+# Quick Multi-View Analysis  
+/spawn --swarm --task "Should we use GraphQL?" \
+       --personas architect,backend,frontend \
+       --aggregate --uc
+       
+# Parallel Documentation
+/spawn --batch docs-tasks.yml --parallel
+# API docs, user guide, dev guide simultaneously
+```
+
+@include shared/multi-agent-patterns.yml#Multi_Agent_System
+
+@include shared/multi-agent-patterns.yml#coordination
+
+@include shared/multi-agent-patterns.yml#output_aggregation
 
 ## Best Practices
 
-Task Definition:
-- Clear objectives
-- Specific deliverables
-- Success criteria
-- Resource limits
-- Time constraints
+**When to use Swarm Mode**:
+- Need multiple perspectives on same problem
+- Critical decisions requiring validation
+- Complex code reviews
+- Architecture decisions
 
-Agent Selection:
-- Match expertise to task
-- Consider dependencies
-- Plan coordination
-- Set boundaries
-- Define handoffs
+**When to use Batch Mode**:
+- Multiple independent tasks
+- Parallel feature development
+- Different expertise needed per task
+- Want to maximize throughput
 
-Coordination:
-- Clear communication
-- Shared context
-- Progress tracking
-- Result integration
-- Quality control
-
-## Examples
-
-```bash
-# Research then implement
-/spawn --agent researcher "OAuth 2.0 best practices"
-/spawn --agent builder "Implement OAuth based on research"
-
-# Parallel feature development
-/spawn --mode parallel --agent builder "User auth, Profile API, Settings UI"
-
-# Full cycle with review
-/spawn --mode sequential "Research → Build → Review payment integration"
-
-# Collaborative system design
-/spawn --mode collaborative --ultrathink "Design microservices architecture"
-```
-
-## Integration
-
-Works with:
-- All command flags pass through
-- Inherits persona preferences
-- Shares project context
-- Accumulates findings
-- Coordinates outputs
-
-## Deliverables
-
-- Agent execution logs
-- Task completion reports
-- Integrated results
-- Performance metrics
-- Lessons learned
-- Handoff documentation
+**When to use Matrix Mode**:
+- Comprehensive analysis needed
+- Multiple components to review
+- Want all perspectives on all parts
+- Quality gates before release
 
 @include shared/universal-constants.yml#Standard_Messages_Templates

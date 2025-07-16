@@ -2,6 +2,7 @@
 
 ## Table of Contents
 - [Quick Start](#quick-start)
+- [Task Mode System](#task-mode-system)
 - [Universal Flags (Available on ALL Commands)](#universal-flags-available-on-all-commands)
 - [Personas as Flags](#personas-as-flags)
 - [Complete Command Reference](#complete-command-reference)
@@ -21,6 +22,51 @@
 /troubleshoot --prod --five-whys --seq      # Production debugging with reasoning
 /task:create "Add user authentication"       # Create and manage complex features
 /deploy --env prod --plan --validate        # Safe production deployment
+```
+
+---
+
+## Task Mode System
+
+SuperClaude enforces clear separation between planning and execution:
+
+### 📋 Define Mode - Planning Only
+```bash
+/task --define "implement user authentication"
+# OR simply start with:
+"I need to add OAuth2 authentication"
+"Please help me create a REST API"
+```
+
+**In Define Mode:**
+- ✅ Gather requirements
+- ✅ Ask clarifying questions
+- ✅ Create task specifications
+- ✅ Generate todo lists
+- ❌ NO code execution
+- ❌ NO file modifications
+
+### ⚡ Work Mode - Execution Only
+```bash
+/task --work TASK-001
+# OR:
+"Work on task TASK-001"
+"Execute the authentication task"
+```
+
+**In Work Mode:**
+- ✅ Execute tasks from todo list
+- ✅ Write and modify code
+- ✅ Update progress
+- ❌ NO new task definitions
+- ❌ NO scope changes
+
+### 🔄 Task Management
+```bash
+/task --list                    # Show all tasks
+/task --show TASK-001          # View task details
+/task --save TASK-001          # Save defined task
+/task --status TASK-001        # Check progress
 ```
 
 ---
@@ -74,6 +120,36 @@
 | `--security` | Security-focused analysis and validation |
 | `--coverage` | Generate comprehensive coverage analysis |
 | `--strict` | Zero-tolerance mode with enhanced validation |
+
+### 📄 Documentation Format
+| Flag | Description |
+|------|-------------|
+| `--org-mode` | Write documentation in Org-mode format (except README.md files) |
+| `--md` | Write documentation in Markdown format (default) |
+| `--journal` | Create/update module change journal in docs/journal.{md,org} (default: enabled) |
+| `--no-journal` | Disable automatic journal updates |
+
+### 🗺️ Roadmap & Planning
+| Flag | Description |
+|------|-------------|
+| `--roadmap [folder]` | Use milestone-based development roadmap (default: roadmap/) |
+
+---
+
+## Environment Configuration
+
+SuperClaude supports project-specific configuration via `.env` files. Copy `.env.example` to `.env` and customize:
+
+| Variable | Description | Values |
+|----------|-------------|---------|
+| `SUPERCLAUDE_ORG_MODE` | Use Org-mode format by default | true/false |
+| `SUPERCLAUDE_MD` | Use Markdown format explicitly | true/false |
+| `SUPERCLAUDE_JOURNAL` | Enable journal updates | true/false |
+| `SUPERCLAUDE_MCP_*` | Control MCP servers per-project | true/false |
+| `SUPERCLAUDE_PERSONA` | Set default persona | architect/frontend/etc |
+| `SUPERCLAUDE_THINK` | Default thinking depth | normal/hard/ultra |
+
+Command-line flags always override environment settings.
 
 ---
 
@@ -385,21 +461,39 @@ Professional system design with specifications.
 
 ### 🔄 Workflow Commands (4)
 
-#### `/spawn` - Specialized Agents
-Spawn focused agents for parallel tasks.
+#### `/spawn` - Multi-Agent Orchestration
+Spawn multiple agents concurrently with different personas and tasks.
 
 **Command-Specific Flags:**
-- `--task` - Define specific task
-- `--parallel` - Concurrent execution
-- `--specialized` - Domain expertise
-- `--collaborative` - Multi-agent work
-- `--sync` - Synchronize results
-- `--merge` - Merge outputs
+- `--task` - Define specific task for single agent
+- `--batch` - Spawn multiple agents from config file
+- `--swarm` - Multiple personas on same task
+- `--matrix` - Multiple personas × multiple tasks
+- `--personas` - Comma-separated persona list
+- `--parallel` - Concurrent execution (default)
+- `--sequential` - Execute agents in order
+- `--dependent` - Honor task dependencies
+- `--coordinate` - Enable inter-agent communication
+- `--aggregate` - Combine outputs into single report
+- `--monitor` - Real-time progress tracking
 
 **Examples:**
 ```bash
-/spawn --task "frontend tests" --parallel  # Parallel testing
-/spawn --collaborative --sync              # Team simulation
+# Single agent (traditional)
+/spawn --task "implement auth" --persona-backend
+
+# Multiple agents, different tasks
+/spawn --batch auth-tasks.yml --coordinate
+
+# Swarm: 3 personas analyze same code
+/spawn --swarm --task "review architecture" \
+       --personas architect,security,performance
+
+# Matrix: 3 personas × 4 tasks = 12 agents
+/spawn --matrix feature-matrix.yml --monitor
+
+# Sequential with dependencies
+/spawn --batch pipeline.yml --sequential --dependent
 ```
 
 #### `/document` - Documentation Creation

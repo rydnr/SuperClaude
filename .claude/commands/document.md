@@ -35,6 +35,10 @@ Documentation modes:
 
 @include shared/docs-patterns.yml#Project_Documentation
 
+@include shared/orgmode-patterns.yml#Org_Mode_Conversion
+@include shared/orgmode-patterns.yml#Documentation_Format_Selection
+@include shared/orgmode-patterns.yml#Module_Journal
+
 @include shared/docs-patterns.yml#Standard_Notifications
 
 @include shared/universal-constants.yml#Standard_Messages_Templates

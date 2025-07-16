@@ -34,6 +34,7 @@ You should use the following configuration to guide your behavior.
 ## Task Management
 @include shared/superclaude-core.yml#Task_Management
 @include commands/shared/task-management-patterns.yml#Task_Management_Hierarchy
+@include commands/shared/task-mode-patterns.yml#Task_Mode_System
 
 ## Performance Standards
 @include shared/superclaude-core.yml#Performance_Standards
@@ -46,6 +47,9 @@ You should use the following configuration to guide your behavior.
 ## Session Management
 @include shared/superclaude-core.yml#Session_Management
 @include commands/shared/system-config.yml#Session_Settings
+
+## Environment Configuration
+@include commands/shared/env-config-patterns.yml#Environment_Configuration
 
 ## Rules & Standards
 

@@ -1,4 +1,4 @@
-**Purpose**: Complex feature management across sessions
+**Purpose**: Task definition and execution management
 
 ---
 
@@ -7,147 +7,56 @@
 ## Command Execution
 Execute: immediate. --plan→show plan first
 Legend: Generated based on symbols used in command
-Purpose: "[Action][Subject] in $ARGUMENTS"
+Purpose: "[Mode][Task] management"
 
-Manage complex features and requirements across sessions with automatic breakdown, context preservation, and recovery capabilities.
+Enforce clear separation between task definition and execution phases.
 
 @include shared/flag-inheritance.yml#Universal_Always
 
 Examples:
-- `/task:create "Implement OAuth 2.0 authentication system"` - Create complex feature task
-- `/task:status oauth-task-id` - Check task status  
-- `/task:resume oauth-task-id` - Resume work after break
-- `/task:update oauth-task-id "Found library conflict"` - Update with discoveries
+- `/task --define "implement OAuth2 authentication"` - Define new task
+- `/task --work TASK-001` - Work on existing task  
+- `/task --list` - Show all tasks
+- `/task --status TASK-001` - Check task progress
 
-## Operations
+Task modes:
 
-/task:create [description]:
-- Create new task with automatic breakdown
-- Generate subtasks & milestones
-- Set up tracking structure
-- Initialize context preservation
+**--define:** Task definition mode
+- Gather requirements and clarify scope
+- Create detailed task specification
+- Generate todo list without execution
+- Output plan for user approval
 
-/task:update [task-id] [updates]:
-- Update task progress
-- Modify requirements
-- Adjust timeline
-- Add discoveries
+**--work:** Task execution mode  
+- Load existing task definition
+- Execute todos systematically
+- Track progress and update status
+- Report completion and blockers
 
-/task:status [task-id]:
-- Show current progress
-- List completed subtasks
-- Display blockers
-- Estimate remaining work
+**--list:** View all tasks
+- Show task ID, title, status
+- Filter by status: defined, in_progress, completed, blocked
 
-/task:resume [task-id]:
-- Load task context
-- Continue from last point
-- Restore working state
-- Update progress
+**--show:** Display task details
+- Full task definition and scope
+- Todo list with completion status
+- Progress tracking and blockers
 
-/task:complete [task-id]:
-- Mark task as done
-- Generate summary
-- Archive artifacts
-- Create documentation
+**--save:** Save defined task
+- Persist task definition to .claude/tasks/
+- Assign unique task ID
+- Ready for execution with --work
 
-## Task Structure
+**--delete:** Remove task
+- Delete task file and history
+- Requires confirmation
 
-@include shared/task-management-patterns.yml#Task_Management_Hierarchy
+**--status:** Update task status
+- Mark as: defined, in_progress, completed, blocked
+- Add blocker descriptions
 
-Task Components:
-- Title & description
-- Acceptance criteria
-- Technical requirements
-- Subtask breakdown
-- Progress tracking
-- Context preservation
+@include shared/task-mode-patterns.yml#Task_Mode_System
 
-## Automatic Features
-
-Smart Breakdown:
-- Analyze complexity
-- Create subtasks
-- Identify dependencies
-- Estimate effort
-- Set milestones
-
-Context Preservation:
-- Save working state
-- Track decisions
-- Store code changes
-- Maintain history
-- Enable recovery
-
-Progress Tracking:
-- Update automatically
-- Track blockers
-- Monitor velocity
-- Adjust estimates
-- Report status
-
-## Recovery System
-
-@include shared/session-recovery.yml#Recovery_Patterns
-
-Session Recovery:
-- Auto-detect incomplete tasks
-- Load previous context
-- Resume from checkpoint
-- Maintain continuity
-- Preserve momentum
-
-## Best Practices
-
-Task Creation:
-- Clear requirements
-- Measurable outcomes
-- Realistic scope
-- Defined boundaries
-- Success criteria
-
-Task Management:
-- Regular updates
-- Track blockers early
-- Document decisions
-- Test incrementally
-- Communicate progress
-
-## Examples
-
-```bash
-# Create complex feature task
-/task:create "Implement OAuth 2.0 authentication system"
-
-# Check task status
-/task:status oauth-task-id
-
-# Resume work after break
-/task:resume oauth-task-id
-
-# Update with discoveries
-/task:update oauth-task-id "Found library conflict, switching approach"
-
-# Complete with summary
-/task:complete oauth-task-id
-```
-
-## Integration
-
-Works with:
-- TodoWrite for subtasks
-- Git for version control
-- Test for validation
-- Document for artifacts
-- All development commands
-
-## Deliverables
-
-- Task breakdown document
-- Progress tracking reports
-- Technical decisions log
-- Implementation artifacts
-- Completion summary
-- Lessons learned
+@include shared/task-mode-patterns.yml#mode_enforcement
 
 @include shared/universal-constants.yml#Standard_Messages_Templates

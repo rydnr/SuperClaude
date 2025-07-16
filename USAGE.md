@@ -20,6 +20,345 @@ A comprehensive guide to using SuperClaude's 19 commands, 9 personas, and extens
 - **Introspection**: `--introspect`
 - **Development**: `--ddd`, `--tdd`, `--human-review` (enabled by default, use `--no-ddd`, `--no-tdd`, `--no-human-review` to disable)
 
+## 🔄 Task Mode Workflows
+
+### Define Mode Examples
+```bash
+# Start task definition
+/task --define "implement user authentication with OAuth2"
+
+# Natural language triggers define mode
+"I need to add a shopping cart feature"
+"Please help me refactor the database layer"
+
+# System response in define mode:
+📋 [DEFINE MODE] Task Definition: Shopping Cart Feature
+
+Let me gather requirements:
+1. What items need to be stored?
+2. Persistence approach (session/database)?
+3. Guest checkout support?
+4. Integration with existing user system?
+
+[After gathering info...]
+
+📄 Task Definition Complete
+- ID: TASK-002
+- Title: Shopping Cart Feature
+- Todos: 12 items
+- Estimated effort: 2-3 days
+
+Save with: /task --save TASK-002
+```
+
+### Work Mode Examples
+```bash
+# Execute existing task
+/task --work TASK-002
+
+# System response in work mode:
+⚡ [WORK MODE] Loading: Shopping Cart Feature
+
+📊 Task Status
+- Total todos: 12
+- Completed: 0
+- Current: Create cart database schema
+
+Starting implementation...
+[Actual code execution happens here]
+```
+
+### Task Management
+```bash
+# List all tasks
+/task --list
+# Output:
+┌─────────┬──────────────────────┬────────────┐
+│ ID      │ Title                │ Status     │
+├─────────┼──────────────────────┼────────────┤
+│ TASK-001│ OAuth2 Authentication│ completed  │
+│ TASK-002│ Shopping Cart Feature│ in_progress│
+│ TASK-003│ API Rate Limiting    │ defined    │
+└─────────┴──────────────────────┴────────────┘
+
+# Show task details
+/task --show TASK-002
+
+# Update status
+/task --status TASK-002 blocked "Waiting for payment gateway API keys"
+```
+
+## 🗺️ Roadmap-Driven Development
+
+### Initialize Roadmap
+```bash
+# Create roadmap for web application
+/roadmap --create web-app
+
+# Use custom roadmap folder
+/roadmap docs/milestones/ --create api-service
+
+# System creates milestone files:
+📁 roadmap/
+  ├── 01-project-setup.md
+  ├── 02-authentication.md
+  ├── 03-core-features.md
+  ├── 04-frontend.md
+  ├── 05-testing.md
+  ├── 06-deployment.md
+  └── 07-monitoring.md
+```
+
+### Validate Against All Personas
+```bash
+# Run multi-persona validation
+/roadmap --validate
+
+# Output:
+🔍 Validating milestone: 02-authentication.md
+
+✅ Architect validation: PASSED (5/5 criteria)
+⚠️  Security validation: INCOMPLETE (7/9 criteria)
+    Missing: Session timeout configuration
+    Missing: Brute force protection
+    
+✅ Frontend validation: PASSED (6/6 criteria)
+✅ Backend validation: PASSED (6/6 criteria)
+❌ QA validation: FAILED (4/6 criteria)
+    Missing: Load testing scenarios
+    Missing: Chaos engineering tests
+
+📋 Suggested additions:
+1. Add task: Security audit with penetration testing
+2. Add task: Performance testing under load
+3. Add task: Implement session timeout handling
+```
+
+### Track Progress
+```bash
+# Check current status
+/roadmap --status
+
+# Output:
+📊 Roadmap Progress
+
+Completed Milestones:
+✅ 01-project-setup.md (100% - 8/8 tasks)
+
+Current Milestone:
+🔄 02-authentication.md (60% - 6/10 tasks)
+  ✅ Database Schema Design
+  ✅ Security Planning
+  ✅ API Endpoints Design
+  ✅ Auth Service Implementation
+  ✅ OAuth2 Integration
+  ✅ Frontend Components
+  ⏳ Security Hardening (in progress)
+  ⏹️ Integration Testing
+  ⏹️ Performance Optimization
+  ⏹️ Documentation
+
+Upcoming Milestones:
+📋 03-core-features.md (0% - 0/12 tasks)
+📋 04-frontend.md (0% - 0/15 tasks)
+```
+
+### Execute Next Task
+```bash
+# Get next task with optimal configuration
+/roadmap --next
+
+# Output:
+📌 Next Task: Security Hardening
+
+Recommended execution:
+/improve --security --strict --persona-security --think-hard --c7 --seq
+
+This task requires:
+- Implement rate limiting on auth endpoints
+- Add CSRF token validation
+- Configure secure headers (HSTS, CSP, etc.)
+- Set up brute force protection
+- Implement session timeout
+
+Start with: /task --work ROADMAP-02-07
+```
+
+### Complete Milestone
+```bash
+# Mark milestone as complete
+/roadmap --complete 02-authentication
+
+# System runs all persona validations
+# Updates progress tracking
+# Logs to journal
+# Shows next milestone
+```
+
+## 🤖 Multi-Agent Workflows
+
+### Parallel Development Team
+```bash
+# Create batch configuration
+cat > auth-team.yml << EOF
+agents:
+  - id: design-api
+    task: "Design authentication API endpoints"
+    persona: architect
+    thinking: think-hard
+    mcps: [c7, seq]
+    
+  - id: implement-backend
+    task: "Implement auth service with JWT"
+    persona: backend
+    thinking: think
+    mcps: [c7]
+    depends_on: [design-api]
+    
+  - id: create-ui
+    task: "Build login/register components"
+    persona: frontend
+    thinking: think
+    mcps: [magic, c7]
+    
+  - id: security-review
+    task: "Security audit auth implementation"
+    persona: security
+    thinking: ultrathink
+    mcps: [c7, seq]
+    depends_on: [implement-backend]
+    
+  - id: write-tests
+    task: "Create auth test suite"
+    persona: qa
+    thinking: think
+    mcps: [pup, c7]
+    depends_on: [implement-backend, create-ui]
+EOF
+
+# Launch team with coordination
+/spawn --batch auth-team.yml --coordinate --dependent --monitor
+
+# Real-time monitoring shows:
+🚀 Authentication Team Status
+
+Completed: ✅ design-api (architect)
+Running:   
+├── implement-backend (backend): 65% ██████▌   
+├── create-ui (frontend): 80% ████████  
+Waiting:   
+├── security-review (security) - waiting for implement-backend
+└── write-tests (qa) - waiting for dependencies
+```
+
+### Multi-Persona Code Review (Swarm)
+```bash
+# Get comprehensive review from multiple perspectives
+/spawn --swarm --task "Review PR #123: New payment system" \
+       --personas architect,security,performance,backend,qa \
+       --aggregate --think-hard
+
+# Each persona examines the same code:
+# Architect → Design patterns, scalability
+# Security → Vulnerabilities, data protection  
+# Performance → Bottlenecks, optimization
+# Backend → Implementation quality, APIs
+# QA → Test coverage, edge cases
+
+# Aggregated output:
+📊 Multi-Persona Review: PR #123
+
+## Consensus Issues (All personas agree):
+1. Missing error handling in payment processor
+2. No retry logic for failed transactions
+3. Insufficient logging for debugging
+
+## Architect Concerns:
+- Payment module too tightly coupled to order system
+- Suggests event-driven architecture
+
+## Security Critical:
+- ⚠️ Credit card numbers logged in plain text
+- Missing PCI compliance checks
+- No rate limiting on payment endpoints
+
+## Performance Findings:
+- Database queries not optimized (N+1 problem)
+- No caching strategy for currency rates
+
+[Full report continues...]
+```
+
+### Feature Matrix Development
+```bash
+# Create matrix configuration
+cat > feature-matrix.yml << EOF
+tasks:
+  - id: user-profile
+    description: "User profile management"
+  - id: notifications
+    description: "Notification system"
+  - id: search
+    description: "Search functionality"
+  - id: analytics
+    description: "Analytics dashboard"
+
+personas: [architect, backend, frontend, qa]
+
+execution:
+  mode: parallel
+  coordinate: true
+  aggregate_by: task
+EOF
+
+# Launch 16 agents (4 tasks × 4 personas)
+/spawn --matrix feature-matrix.yml --monitor --aggregate
+
+# Creates comprehensive development coverage:
+         | architect | backend | frontend | qa |
+---------|-----------|---------|----------|-----|
+profile  |    🏃     |   🏃    |    🏃    | 🏃  |
+notify   |    🏃     |   🏃    |    🏃    | 🏃  |
+search   |    🏃     |   🏃    |    🏃    | 🏃  |
+analytics|    🏃     |   🏃    |    🏃    | 🏃  |
+```
+
+### Quick Decision Making
+```bash
+# Should we migrate to microservices?
+/spawn --swarm --task "Evaluate microservices migration" \
+       --personas architect,backend,performance,mentor \
+       --aggregate --uc
+
+# Fast multi-perspective analysis:
+✅ Architect: Yes - Better scalability, team autonomy
+⚠️ Backend: Maybe - Complexity increase, need orchestration
+❌ Performance: No - Network latency, distributed transactions  
+✅ Mentor: Yes - If team is ready, good learning opportunity
+
+Consensus: Proceed with phased approach, start with 2 services
+```
+
+### Parallel Documentation
+```bash
+# Document entire system simultaneously
+/spawn --batch docs-plan.yml --parallel
+
+agents:
+  - task: "API documentation with examples"
+    persona: backend
+  - task: "User guide with screenshots"  
+    persona: frontend
+  - task: "Architecture decision records"
+    persona: architect
+  - task: "Deployment and operations guide"
+    persona: backend
+  - task: "Security best practices"
+    persona: security
+
+# All documentation created in parallel
+```
+
 ## 🎭 Persona-Driven Workflows
 
 ### 🏗️ Systems Architect Workflows
@@ -246,11 +585,20 @@ A comprehensive guide to using SuperClaude's 19 commands, 9 personas, and extens
 
 **Documentation & Training**
 ```bash
-# API documentation
+# API documentation (default markdown format)
 /document --api --user-friendly --persona-mentor --c7 --visual
 
-# Best practices guide
-/document --best-practices --standards --persona-mentor --evidence --c7
+# API documentation in Org-mode format
+/document --api --user-friendly --persona-mentor --c7 --visual --org-mode
+
+# Best practices guide (explicitly markdown)
+/document --best-practices --standards --persona-mentor --evidence --c7 --md
+
+# Best practices guide in Org-mode
+/document --best-practices --standards --persona-mentor --evidence --c7 --org-mode
+
+# Generate docs without journal updates
+/document --architecture --detailed --no-journal
 
 # Interactive tutorials
 /explain --interactive --step-by-step --persona-mentor --examples --visual
@@ -334,8 +682,9 @@ A comprehensive guide to using SuperClaude's 19 commands, 9 personas, and extens
 # 5. Security baseline
 /scan --security --baseline --persona-security --validate
 
-# 6. Documentation setup
-/document --init --structure --persona-mentor --c7
+# 6. Documentation setup (choose format)
+/document --init --structure --persona-mentor --c7 --md        # Markdown format
+/document --init --structure --persona-mentor --c7 --org-mode  # Org-mode format
 ```
 
 ### Code Review Process
@@ -443,6 +792,55 @@ A comprehensive guide to using SuperClaude's 19 commands, 9 personas, and extens
 
 # Performance-focused testing
 /test --performance --load --pup --persona-performance --iterate --threshold 95%
+```
+
+### Documentation Format Options
+```bash
+# Default: Documentation in Markdown format with journal
+/document --api --detailed    # Creates .md files + updates journal.md
+
+# Explicitly specify Markdown format
+/document --api --detailed --md    # Ensures .md output
+
+# Generate documentation in Org-mode format (for Emacs users)
+/document --api --detailed --org-mode    # Creates .org files + journal.org
+
+# Org-mode for architecture docs (README.md stays as markdown)
+/document --architecture --org-mode    # All docs in .org except README.md
+
+# Mix formats in multi-document projects
+/document --init --org-mode    # Project docs in .org, README.md stays .md
+
+# Disable journal updates
+/document --api --no-journal    # Creates docs without updating journal
+
+# Journal entries track module changes
+/build --feature "auth system" --tdd    # Automatically logs to journal
+/refactor --module "database" --clean   # Updates journal with refactoring
+```
+
+### Project-Specific Configuration (.env)
+```bash
+# Create .env file for project defaults
+cp .env.example .env
+
+# Example: Emacs/Org-mode project
+echo "SUPERCLAUDE_ORG_MODE=true" > .env
+echo "SUPERCLAUDE_MCP_C7=true" >> .env
+
+# Example: Frontend project with UI tools
+echo "SUPERCLAUDE_MCP_MAGIC=true" > .env
+echo "SUPERCLAUDE_PERSONA=frontend" >> .env
+
+# Example: Security-focused project
+echo "SUPERCLAUDE_VALIDATE=true" > .env
+echo "SUPERCLAUDE_STRICT=true" >> .env
+echo "SUPERCLAUDE_PERSONA=security" >> .env
+
+# Commands now use .env defaults
+/document --api    # Uses SUPERCLAUDE_ORG_MODE setting
+/build --feature   # Uses SUPERCLAUDE_MCP_MAGIC setting
+/analyze --code    # Uses SUPERCLAUDE_PERSONA setting
 ```
 
 ### Token-Optimized Workflows
