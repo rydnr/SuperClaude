@@ -20,6 +20,9 @@ Examples:
 - `/git --pre-commit` - Setup pre-commit framework and basic hooks
 - `/git --commit "Fix validation logic" --pre-commit` - Commit with pre-commit validation
 - `/git --pre-commit --security` - Setup with security hooks included
+- `/git --commit --tdd "🧪 Add failing test for user validation"` - TDD red phase commit
+- `/git --commit --tdd "✅ Implement user validation logic"` - TDD green phase commit
+- `/git --commit --tdd "🚀 Refactor validation to use strategy pattern"` - TDD refactor commit
 
 Git operations:
 
@@ -32,6 +35,12 @@ Git operations:
 - release: Release branch workflow | gitflow: Full GitFlow model
 
 **--pre-commit:** Setup and manage pre-commit hooks | Auto-install framework | Configure quality checks | Run hooks before commits
+
+**--tdd:** Test-driven development commit workflow with emoji conventions:
+- 🧪 New failing test (Red phase)
+- 🤔 Naive implementation (Quick fix to pass)
+- ✅ Working implementation (Green phase with real logic)
+- 🚀 Refactor (Improve code after green)
 
 @include shared/execution-patterns.yml#Git_Integration_Patterns
 

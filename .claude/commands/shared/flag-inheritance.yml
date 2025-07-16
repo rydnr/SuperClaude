@@ -25,12 +25,44 @@ Universal_Always:
     --seq: "Enable Sequential→complex analysis & thinking"
     --magic: "Enable Magic→UI component generation"
     --pup: "Enable Puppeteer→browser automation & testing"
+    --pup-headless: "Enable Puppeteer Headless→browser automation in headless mode"
+    --playwright: "Enable Playwright→browser automation, E2E testing & recording"
+    --mongodb-localhost: "Enable MongoDB→localhost database operations"
+    --memory: "Enable Memory→persistent knowledge graph"
+    --fetch: "Enable Fetch→web content retrieval & markdown conversion"
+    --time: "Enable Time→timezone & time conversion utilities"
+    --mermaid: "Enable Mermaid→diagram generation from text descriptions"
+    --helm: "Enable Helm→Kubernetes Helm charts & repository access"
+    --argocd: "Enable ArgoCD→GitOps continuous delivery for Kubernetes"
+    --jira: "Enable Jira→Atlassian issue tracking & project management"
+    --confluence: "Enable Confluence→Atlassian wiki & documentation platform"
+    --excel: "Enable Excel→Microsoft Excel spreadsheet operations"
+    --openapi: "Enable OpenAPI→API specification management & exploration"
+    --nixos: "Enable NixOS→Nix package manager & configuration search"
+    --pandoc: "Enable Pandoc→Universal document format conversion"
+    --elasticsearch: "Enable Elasticsearch→Full-text search & analytics engine"
     --all-mcp: "Enable all MCP servers"
     --no-mcp: "Disable all MCP servers (native tools only)"
     --no-c7: "Disable Context7 specifically"
     --no-seq: "Disable Sequential thinking specifically"
     --no-magic: "Disable Magic UI builder specifically"
     --no-pup: "Disable Puppeteer specifically"
+    --no-pup-headless: "Disable Puppeteer Headless specifically"
+    --no-playwright: "Disable Playwright specifically"
+    --no-mongodb-localhost: "Disable MongoDB localhost specifically"
+    --no-memory: "Disable Memory specifically"
+    --no-fetch: "Disable Fetch specifically"
+    --no-time: "Disable Time specifically"
+    --no-mermaid: "Disable Mermaid specifically"
+    --no-helm: "Disable Helm specifically"
+    --no-argocd: "Disable ArgoCD specifically"
+    --no-jira: "Disable Jira specifically"
+    --no-confluence: "Disable Confluence specifically"
+    --no-excel: "Disable Excel specifically"
+    --no-openapi: "Disable OpenAPI specifically"
+    --no-nixos: "Disable NixOS specifically"
+    --no-pandoc: "Disable Pandoc specifically"
+    --no-elasticsearch: "Disable Elasticsearch specifically"
     
   Persona_Control:
     --persona-architect: "Systems architect thinking mode (sequential design, patterns)"
@@ -46,6 +78,14 @@ Universal_Always:
   Introspection:
     --introspect: "Deep transparency mode - expose thinking, decisions, workflow"
     --introspection: "Alias for --introspect"
+    
+  Development_Methodologies:
+    --ddd: "Apply Domain-Driven Design principles"
+    --tdd: "Test-driven development workflow"
+    --no-ddd: "Disable Domain-Driven Design principles"
+    --no-tdd: "Disable test-driven development workflow"
+    --human-review: "Enable human review workflow with task documentation (default enabled)"
+    --no-human-review: "Disable human review workflow"
 ```
 
 ## Common Workflow Flags (3+ Commands)
@@ -125,6 +165,7 @@ Operations_Commands:
     --rollback: "Rollback to previous state"
     --checkpoint: "Create checkpoint before operation"
     --sync: "Synchronize w/ remote/upstream"
+    --tdd: "Test-driven development workflow with emoji conventions"
 ```
 
 ## Flag Usage Templates
@@ -175,11 +216,32 @@ Inheritance_Priority:
   
 Conflict_Resolution:
   --force_overrides: ["--validate", "--dry-run", "--interactive"]
-  --no-mcp_overrides: ["--c7", "--seq", "--magic", "--pup", "--all-mcp"]
+  --no-mcp_overrides: ["--c7", "--seq", "--magic", "--pup", "--pup-headless", "--playwright", "--mongodb-localhost", "--memory", "--fetch", "--time", "--mermaid", "--helm", "--argocd", "--jira", "--confluence", "--excel", "--openapi", "--nixos", "--pandoc", "--elasticsearch", "--all-mcp"]
+  --no-ddd_overrides: ["--ddd"]
+  --no-tdd_overrides: ["--tdd"]
+  --no-pup_overrides: ["--pup"]
+  --no-pup-headless_overrides: ["--pup-headless"]
+  --no-playwright_overrides: ["--playwright"]
+  --no-mongodb-localhost_overrides: ["--mongodb-localhost"]
+  --no-memory_overrides: ["--memory"]
+  --no-fetch_overrides: ["--fetch"]
+  --no-time_overrides: ["--time"]
+  --no-mermaid_overrides: ["--mermaid"]
+  --no-helm_overrides: ["--helm"]
+  --no-argocd_overrides: ["--argocd"]
+  --no-jira_overrides: ["--jira"]
+  --no-confluence_overrides: ["--confluence"]
+  --no-excel_overrides: ["--excel"]
+  --no-openapi_overrides: ["--openapi"]
+  --no-nixos_overrides: ["--nixos"]
+  --no-pandoc_overrides: ["--pandoc"]
+  --no-elasticsearch_overrides: ["--elasticsearch"]
+  --no-human-review_overrides: ["--human-review"]
   --strict_enhances: ["--validate", "--security", "--coverage"]
   
 Auto_Combinations:
   --all + group_flags: "Enable all flags in command's group"
+  --all-mcp: "Enables --c7, --seq, --magic, --pup, --pup-headless, --playwright, --mongodb-localhost, --memory, --fetch, --time, --mermaid, --helm, --argocd, --jira, --confluence, --excel, --openapi, --nixos, --pandoc, --elasticsearch"
   --strict + quality_flags: "Enhanced validation for all quality operations"
   --watch + interactive: "Real-time guided operation"
   

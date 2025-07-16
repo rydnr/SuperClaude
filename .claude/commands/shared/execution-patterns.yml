@@ -312,6 +312,11 @@ Git_Workflows:
       - "Type matches change nature"
       - "Description < 50 chars"
       - "Body explains why, not what"
+    TDD_Emoji_System:
+      Red_Phase: "🧪 New failing test - After test is added"
+      Quick_Fix: "🤔 Naive implementation - When test passes trivially"
+      Green_Phase: "✅ Working implementation - When test passes with real logic"
+      Refactor_Phase: "🚀 Refactor - Improving code after green"
       
   Branch_Management:
     Strategy:

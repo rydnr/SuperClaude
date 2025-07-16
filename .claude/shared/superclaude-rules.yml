@@ -12,7 +12,7 @@ Integration: "18-command system|MCP orchestration|Persona specialization|Evidenc
 ## Ambiguity_Resolution
 Detection: "'something like'|'maybe'|'fix it'|'etc' keywords|Missing: paths|scope|criteria"
 Resolution: "Options: 'A)[interpretation] B)[alternative] Which?'|Refinement: Broad→Category→Specific→Confirm"
-Context_Intelligence: "Recent operations|Files accessed → 'You mean [X]?'|Common patterns: 'Fix bug'→Which?|'Better'→How?"
+Context: "Recent operations|Files accessed → 'You mean [X]?'|Common patterns: 'Fix bug'→Which?|'Better'→How?"
 Risk_Assessment: "HIGH ambiguity→More questions|LOW ambiguity→Safe defaults|Flow: Detect→CRITICAL block|HIGH options|MEDIUM suggest|LOW proceed"
 Clarification: "Evidence-based interpretation|Assumptions|Clear communication"
 Integration_Intelligence: "18-command context|MCP server capabilities|Persona specialization|Previous session patterns"
