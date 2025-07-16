@@ -31,7 +31,7 @@ npx @anthropic-ai/claude-code mcp add playwright -- npx -y @playwright/mcp@lates
 
 - MongoDB MCP to browse a local database:
 ```sh
-npx @anthropic-ai/claude-code mcp add mongodb-dmix-localhost -- npx -y mongodb-mcp-server --connectionString="mongodb://localhost:27017/"
+npx @anthropic-ai/claude-code mcp add mongodb-localhost -- npx -y mongodb-mcp-server --connectionString="mongodb://localhost:27017/"
 ```
 
 - MongoDB Lens MCP to browse a local database:
