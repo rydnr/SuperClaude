@@ -86,12 +86,12 @@ infrastructure:
 
 security:
   keywords: [vulnerability, authentication, encryption, audit, compliance]
-  file_patterns: ["*auth*", "*security*", "*.pem", "*.key"]
+  file_patterns: ["*auth*", "*security*", "*.pem", "*.key", "*.crt"]
   typical_operations: [scan, harden, audit, fix]
 
 documentation:
   keywords: [document, README, wiki, guide, manual, instructions, commit, release, changelog]
-  file_patterns: ["*.md", "*.rst", "*.txt", "docs/*", "README*", "CHANGELOG*"]
+  file_patterns: ["*.org", *"*.md", "*.rst", "*.txt", "docs/*", "README*", "CHANGELOG*"]
   typical_operations: [write, document, explain, translate, localize]
 
 iterative:
